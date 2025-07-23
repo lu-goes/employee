@@ -30,4 +30,10 @@ public class EmployeeController {
         EmployeeJpaEntity saved = employeeService.create(employee);
         return new ResponseEntity<>(saved, HttpStatus.CREATED);
     }
+
+    @DeleteMapping
+    public ResponseEntity<Void> deleteById (@PathVariable UUID id){
+        employeeService.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
 }
