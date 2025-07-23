@@ -6,12 +6,24 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.UUID;
 
 @Repository
 @AllArgsConstructor
 public class EmployeeRepositoryImpl implements EmployeeRepository {
 
     private final EmployeeJpaRepository jpaRepository;
+
+    @Override
+    public EmployeeJpaEntity save (Employee employee){
+        EmployeeJpaEntity entity = new EmployeeJpaEntity(
+                UUID.randomUUID(),
+                employee.getName(),
+                employee.getEmail(),
+                employee.getDepartament()
+        );
+        return jpaRepository.save(entity);
+    }
 
     @Override
     public List<Employee> findAll(){

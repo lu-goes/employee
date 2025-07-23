@@ -8,5 +8,7 @@ import java.util.UUID;
 
 public interface EmployeeRepository {
 
+    EmployeeJpaEntity save (Employee employee);
+
     List<Employee> findAll();
 }
