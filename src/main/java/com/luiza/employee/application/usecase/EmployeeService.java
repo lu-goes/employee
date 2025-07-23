@@ -1,5 +1,6 @@
 package com.luiza.employee.application.usecase;
 
+import com.luiza.employee.adapter.out.persistence.EmployeeJpaEntity;
 import com.luiza.employee.domain.model.Employee;
 import com.luiza.employee.domain.repository.EmployeeRepository;
 import lombok.AllArgsConstructor;
@@ -15,6 +16,9 @@ public class EmployeeService {
 
     private EmployeeRepository repository;
 
+    public EmployeeJpaEntity create(Employee employee){
+        return repository.save(employee);
+    }
     public List<Employee> getAll(){
         return repository.findAll();
     }
