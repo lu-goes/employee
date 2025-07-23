@@ -36,5 +36,8 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
                 .toList();
     }
 
-
+    @Override
+    public void deleteById(UUID id) {
+        jpaRepository.deleteById(id);
+    }
 }

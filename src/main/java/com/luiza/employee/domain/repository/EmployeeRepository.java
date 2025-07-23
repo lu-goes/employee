@@ -11,4 +11,6 @@ public interface EmployeeRepository {
     EmployeeJpaEntity save (Employee employee);
 
     List<Employee> findAll();
+
+    void deleteById(UUID id);
 }
