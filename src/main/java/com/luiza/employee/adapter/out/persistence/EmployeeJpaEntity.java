@@ -27,7 +27,7 @@ public class EmployeeJpaEntity {
     private String email;
 
     @Column(nullable = false)
-    private String departament;
+    private String department;
 
 
 }

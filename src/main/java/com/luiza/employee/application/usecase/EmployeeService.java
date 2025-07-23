@@ -24,7 +24,7 @@ public class EmployeeService {
         return repository.findAll();
     }
 
-    public void deleteById(UUID id){
+    public void delete(UUID id){
         repository.deleteById(id);
     }
 

@@ -32,7 +32,7 @@ public class EmployeeController {
     }
 
     @DeleteMapping
-    public ResponseEntity<Void> deleteById (@PathVariable UUID id){
+    public ResponseEntity<Void> delete (@PathVariable UUID id){
         employeeService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
