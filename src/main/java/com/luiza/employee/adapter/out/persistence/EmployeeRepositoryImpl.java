@@ -12,7 +12,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class EmployeeRepositoryImpl implements EmployeeRepository {
 
-    private final EmployeeJpaRepository jpaRepository;
+    private final EmployeeJpaReposgitory jpaRepository;
 
     @Override
     public EmployeeJpaEntity save (Employee employee){
@@ -20,7 +20,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
                 UUID.randomUUID(),
                 employee.getName(),
                 employee.getEmail(),
-                employee.getDepartament()
+                employee.getDepartment()
         );
         return jpaRepository.save(entity);
     }
@@ -31,7 +31,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
                 .map(entity -> new Employee(
                         entity.getName(),
                         entity.getEmail(),
-                        entity.getDepartament()
+                        entity.getDepartment()
                 ))
                 .toList();
     }

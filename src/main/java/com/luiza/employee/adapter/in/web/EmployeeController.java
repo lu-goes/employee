@@ -33,7 +33,7 @@ public class EmployeeController {
 
     @DeleteMapping
     public ResponseEntity<Void> delete (@PathVariable UUID id){
-        employeeService.deleteById(id);
+        employeeService.delete(id);
         return ResponseEntity.noContent().build();
     }
 }
