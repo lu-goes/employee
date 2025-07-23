@@ -3,6 +3,8 @@ package com.luiza.employee.application.usecase;
 import com.luiza.employee.domain.model.Employee;
 import com.luiza.employee.domain.repository.EmployeeRepository;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
