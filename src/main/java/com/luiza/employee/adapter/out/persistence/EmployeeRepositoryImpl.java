@@ -12,7 +12,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class EmployeeRepositoryImpl implements EmployeeRepository {
 
-    private final EmployeeJpaReposgitory jpaRepository;
+    private final EmployeeJpaRepository jpaRepository;
 
     @Override
     public EmployeeJpaEntity save (Employee employee){
