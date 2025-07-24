@@ -30,7 +30,7 @@ public class EmployeeController {
         return new ResponseEntity<>(saved, HttpStatus.CREATED);
     }
 
-    @DeleteMapping
+    @DeleteMapping("{id}")
     public ResponseEntity<Void> delete (@PathVariable UUID id){
         employeeService.delete(id);
         return ResponseEntity.noContent().build();
