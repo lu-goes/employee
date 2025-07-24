@@ -1,9 +1,9 @@
 package com.luiza.employee.adapter.in.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.luiza.employee.adapter.out.persistence.EmployeeJpaEntity;
 import com.luiza.employee.application.usecase.EmployeeService;
 import com.luiza.employee.domain.model.Employee;
+import com.luiza.employee.domain.model.EmployeeResponse;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -23,6 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(EmployeeController.class)
 public class EmployeeControllerIntegrationTest {
+
     @Autowired
     private MockMvc mockMvc;
 
@@ -34,7 +35,7 @@ public class EmployeeControllerIntegrationTest {
 
     @Test
     void listAll_ShouldReturn200WithEmployees() throws Exception {
-        List<Employee> employees = List.of(new Employee("Alice","alice@gmailcom", "Finance"));
+        List<EmployeeResponse> employees = List.of(new EmployeeResponse(UUID.randomUUID(),"Alice","alice@gmailcom", "Finance"));
         when(employeeService.getAll()).thenReturn(employees);
 
         mockMvc.perform(get("/employees"))
@@ -45,7 +46,7 @@ public class EmployeeControllerIntegrationTest {
     @Test
     void create_ShouldReturn201() throws Exception {
         Employee employee = new Employee("Bob","bob@gmail.com", "IT");
-        EmployeeJpaEntity entity = new EmployeeJpaEntity(UUID.randomUUID(), employee.getName(), employee.getEmail(), employee.getDepartment());
+        EmployeeResponse entity = new EmployeeResponse(UUID.randomUUID(), employee.getName(), employee.getEmail(), employee.getDepartment());
 
         when(employeeService.create(any())).thenReturn(entity);
 

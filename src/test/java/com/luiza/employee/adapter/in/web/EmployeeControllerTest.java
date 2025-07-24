@@ -1,8 +1,8 @@
 package com.luiza.employee.adapter.in.web;
 
-import com.luiza.employee.adapter.out.persistence.EmployeeJpaEntity;
 import com.luiza.employee.application.usecase.EmployeeService;
 import com.luiza.employee.domain.model.Employee;
+import com.luiza.employee.domain.model.EmployeeResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
@@ -13,7 +13,6 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.times;
 
 public class EmployeeControllerTest {
     private EmployeeService employeeService;
@@ -27,10 +26,10 @@ public class EmployeeControllerTest {
 
     @Test
     void listAll_ShouldReturnListOfEmployees() {
-        List<Employee> mockEmployees = List.of(new Employee("John Doe","john@gmail.com", "Engineering"));
+        List<EmployeeResponse> mockEmployees = List.of(new EmployeeResponse(UUID.randomUUID(),"John Doe","john@gmail.com", "Engineering"));
         when(employeeService.getAll()).thenReturn(mockEmployees);
 
-        ResponseEntity<List<Employee>> response = employeeController.listAll();
+        ResponseEntity<List<EmployeeResponse>> response = employeeController.listAll();
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(mockEmployees, response.getBody());
@@ -39,14 +38,14 @@ public class EmployeeControllerTest {
     @Test
     void create_ShouldReturnCreatedEmployee() {
         Employee employee = new Employee("Jane Doe","Jane@gmail.com", "HR");
-        EmployeeJpaEntity savedEntity = new EmployeeJpaEntity(UUID.randomUUID(), employee.getName(),employee.getEmail(), employee.getDepartment());
+        EmployeeResponse employeeResponse = new EmployeeResponse(UUID.randomUUID(), employee.getName(),employee.getEmail(), employee.getDepartment());
 
-        when(employeeService.create(employee)).thenReturn(savedEntity);
+        when(employeeService.create(employee)).thenReturn(employeeResponse);
 
-        ResponseEntity<EmployeeJpaEntity> response = employeeController.create(employee);
+        ResponseEntity<EmployeeResponse> response = employeeController.create(employee);
 
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
-        assertEquals(savedEntity, response.getBody());
+        assertEquals(employeeResponse, response.getBody());
     }
 
     @Test
