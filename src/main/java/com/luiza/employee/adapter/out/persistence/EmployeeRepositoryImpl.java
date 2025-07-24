@@ -10,10 +10,13 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-@AllArgsConstructor
 public class EmployeeRepositoryImpl implements EmployeeRepository {
 
     private final EmployeeJpaRepository jpaRepository;
+
+    public EmployeeRepositoryImpl(EmployeeJpaRepository jpaRepository) {
+        this.jpaRepository = jpaRepository;
+    }
 
     @Override
     public EmployeeResponse save (Employee employee){
