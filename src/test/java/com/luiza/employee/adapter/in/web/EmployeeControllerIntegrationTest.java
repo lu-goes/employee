@@ -14,15 +14,13 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.List;
 import java.util.UUID;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(EmployeeController.class)
-public class EmployeeControllerIntegrationTest {
+class EmployeeControllerIntegrationTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -38,7 +36,7 @@ public class EmployeeControllerIntegrationTest {
         List<EmployeeResponse> employees = List.of(new EmployeeResponse(UUID.randomUUID(),"Alice","alice@gmailcom", "Finance"));
         when(employeeService.getAll()).thenReturn(employees);
 
-        mockMvc.perform(get("/employees"))
+        mockMvc.perform(get("/employee"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].name").value("Alice"));
     }
@@ -50,7 +48,7 @@ public class EmployeeControllerIntegrationTest {
 
         when(employeeService.create(any())).thenReturn(entity);
 
-        mockMvc.perform(post("/employees")
+        mockMvc.perform(post("/employee")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(employee)))
                 .andExpect(status().isCreated())
@@ -63,7 +61,7 @@ public class EmployeeControllerIntegrationTest {
 
         doNothing().when(employeeService).delete(id);
 
-        mockMvc.perform(delete("/employees/{id}", id))
+        mockMvc.perform(delete("/employee/{id}", id))
                 .andExpect(status().isNoContent());
     }
 }
