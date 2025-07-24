@@ -18,7 +18,7 @@ public class EmployeeService {
     public EmployeeResponse create(Employee employee){
         return repository.save(employee);
     }
-    public List<Employee> getAll(){
+    public List<EmployeeResponse> getAll(){
         return repository.findAll();
     }
 
