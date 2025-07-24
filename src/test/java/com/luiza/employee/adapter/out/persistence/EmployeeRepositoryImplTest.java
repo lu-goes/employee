@@ -28,13 +28,10 @@ public class EmployeeRepositoryImplTest {
     void save_ShouldSaveEmployeeAndReturnEntity() {
         Employee employee = new Employee("Alice", "alice@example.com", "HR");
         EmployeeJpaEntity savedEntity = new EmployeeJpaEntity(UUID.randomUUID(), "Alice", "alice@example.com", "HR");
-        EmployeeResponse employeeResponse = new EmployeeResponse(UUID.randomUUID(), "Alice", "alice@example.com", "HR");
 
         when(jpaRepository.save(any(EmployeeJpaEntity.class))).thenReturn(savedEntity);
 
         EmployeeResponse result = employeeRepository.save(employee);
-
-        assertEquals(savedEntity, result);
 
         // Captura e verifica o objeto passado para o save
         ArgumentCaptor<EmployeeJpaEntity> captor = ArgumentCaptor.forClass(EmployeeJpaEntity.class);
@@ -43,6 +40,11 @@ public class EmployeeRepositoryImplTest {
         assertEquals("Alice", captured.getName());
         assertEquals("alice@example.com", captured.getEmail());
         assertEquals("HR", captured.getDepartment());
+
+        // Verifica o objeto passado como parametro no create com a saida do metodo
+        assertEquals(result.getName(), employee.getName());
+        assertEquals(result.getEmail(), employee.getEmail());
+        assertEquals(result.getDepartment(), employee.getDepartment());
     }
 
     @Test
