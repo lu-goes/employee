@@ -7,7 +7,6 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-
 public class Employee {
     @NotBlank(message = "Name must not be black")
     private String name;
