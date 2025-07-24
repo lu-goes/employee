@@ -36,7 +36,7 @@ class EmployeeControllerIntegrationTest {
         List<EmployeeResponse> employees = List.of(new EmployeeResponse(UUID.randomUUID(),"Alice","alice@gmailcom", "Finance"));
         when(employeeService.getAll()).thenReturn(employees);
 
-        mockMvc.perform(get("/employee"))
+        mockMvc.perform(get("/employees"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].name").value("Alice"));
     }
@@ -48,7 +48,7 @@ class EmployeeControllerIntegrationTest {
 
         when(employeeService.create(any())).thenReturn(entity);
 
-        mockMvc.perform(post("/employee")
+        mockMvc.perform(post("/employees")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(employee)))
                 .andExpect(status().isCreated())
@@ -61,7 +61,7 @@ class EmployeeControllerIntegrationTest {
 
         doNothing().when(employeeService).delete(id);
 
-        mockMvc.perform(delete("/employee/{id}", id))
+        mockMvc.perform(delete("/employees/{id}", id))
                 .andExpect(status().isNoContent());
     }
 }
