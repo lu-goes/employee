@@ -119,10 +119,12 @@ curl -X GET http://localhost:8080/employees
 ### ➕ Cadastrar funcionário
 
 ```bash
-curl -X POST http://localhost:8080/employees   -H "Content-Type: application/json"   -d '{
-    "name": "Ana Souza",
-    "email": "ana.souza@email.com",
-    "department": "TI"
+curl --location 'http://localhost:8080/employees' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name": "Luiza Goes",
+    "email": "luiza.goes@itau.com.br",
+    "department": "Engenharia"
 }'
 ```
 
@@ -131,7 +133,8 @@ curl -X POST http://localhost:8080/employees   -H "Content-Type: application/jso
 ### ❌ Remover funcionário
 
 ```bash
-curl -X DELETE http://localhost:8080/employees/{id}
+curl --location --request DELETE 'http://localhost:8080/employees/{id}' \
+--header 'Content-Type: application/json'
 ```
 
 Substitua `{id}` pelo UUID do funcionário.
