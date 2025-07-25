@@ -22,8 +22,9 @@ API RESTful para cadastro e gerenciamento de funcionários.
 - Swagger/OpenAPI 3
 - JUnit 5 + Mockito
 - Docker + Docker Compose
-- Jacoco
+- Relatório de cobertura de testes (Jacoco)
 - Arquitetura: DDD + Clean Architecture + SOLID
+- Pipeline CI/CD
 
 ---
 
