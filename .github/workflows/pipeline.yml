@@ -1,0 +1,43 @@
+name: CI/CD - Projects Employees
+
+on:
+  push:
+    branches:
+      master
+    pull_request:
+      master
+jobs:
+  build:
+    name: Build, Test & Coverage with Maven
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout do código
+        uses: actions/checkout@v4
+
+      - name: ☕ Configurar Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+      - name: 📦 Cache do Maven
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven
+
+      - name: 🔨 Compilar, testar e gerar relatório
+        run: mvn clean verify jacoco:report
+
+      - name: 📊 Publicar relatório de cobertura (JaCoCo)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: jacoco-report
+          path: target/custom-jacoco-report
+      - name: Simulação de Deploy em Produção
+        run:
+          echo "Simulando deploy..."
+          echo "Deploy fictício concluído com sucesso!"
